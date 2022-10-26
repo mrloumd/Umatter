@@ -21,7 +21,7 @@ const faciEnterRoom = {
     if (!channel) {
       throw new Error("Channel not found");
     }
-    ("dd");
+
     let facilitator = await Facilitator.findById(params.facilitatorId);
     if (!facilitator) {
       throw new Error("Facilitator not found");
