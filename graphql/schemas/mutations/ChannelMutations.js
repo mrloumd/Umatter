@@ -21,7 +21,7 @@ const faciEnterRoom = {
     if (!channel) {
       throw new Error("Channel not found");
     }
-
+    ("dd");
     let facilitator = await Facilitator.findById(params.facilitatorId);
     if (!facilitator) {
       throw new Error("Facilitator not found");
@@ -58,9 +58,8 @@ const faciEnterRoom = {
     pubsub.publish(channel._id, {
       channelUpdates: { facilitator: facilitator },
     });
-    user.action = "LEFT"
-    pubsub.publish('QUEUE_UPDATE', { queueUpdate:user });
-
+    user.action = "LEFT";
+    pubsub.publish("QUEUE_UPDATE", { queueUpdate: user });
 
     return user; //fix typedefs
   },
@@ -76,7 +75,7 @@ const cleanRoom = {
   args: {
     channelId: { type: new GraphQLNonNull(GraphQLString) },
   },
-  resolve: async function (root, params, { req, res,pubsub }) {
+  resolve: async function (root, params, { req, res, pubsub }) {
     // if(!req.isAuth) {
     //   res.status(401)
     //   throw new Error("Not Authenticated");
@@ -123,7 +122,7 @@ const cleanRoom = {
       throw new Error("User not found");
     }
 
-    pubsub.publish( params.channelId, {
+    pubsub.publish(params.channelId, {
       channelUpdates: { isChannelExists: false },
     });
 
